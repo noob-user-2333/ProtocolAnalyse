@@ -1,0 +1,99 @@
+<protocol>
+    <Modbus_RTU>
+        <ReadAndWriteOneWordAndWriteResponse>
+            <address length="1" input="0x8E"/>
+            <command length="1"/>
+            <regAddr length="2"/>
+            <regCountOrData length="2"/>
+            <CRC length="2"/>
+        </ReadAndWriteOneWordAndWriteResponse>
+        <ReadResponse>
+            <address length="1" input="0x8E"/>
+            <command length="1"/>
+            <length length="1"/>
+            <data length="length * 2"/>
+            <CRC length="2"/>
+        </ReadResponse>
+        <Write>
+            <address length="1" input="0x8E"/>
+            <command length="1"/>
+            <regAddr length="2"/>
+            <regCount length="2"/>
+            <dataLength length="1"/>
+            <data length="regCount * dataLength"/>
+            <CRC length="2"/>
+        </Write>
+        <ErrorResponse>
+            <address length="1"/>
+            <command length="1"/>
+            <ErrorCode length="1"/>
+            <CRC length="2"/>
+        </ErrorResponse>
+    </Modbus_RTU>
+    <Modubus_ASCII>
+        <normal>
+            <start length="1" const="0x3A"/>
+            <address length="2" />
+            <function length="2" />
+            <data />
+            <LRCcheck length="2"/>
+            <end  length="2" const="0x0D0A"/>
+            <checkSum/>
+        </normal>
+    </Modubus_ASCII>
+    <Profibus_DP defaultAddress="0x10">
+        <NoData>
+            <SD1 const = "0x10" length="1"/>
+            <DA  length = "1"/>
+            <SA />
+            <FC/>
+            <FCS/>
+            <ED length="1" const="0x16"/>
+        </NoData>
+        <VariableLengthData>
+            <SD2 length="1" const="0x68"/>
+            <LE length="1"/>
+            <LEr length="1" repeat="LE"/>
+            <SD2r length="1" const="0x68"/>
+            <DA length="1"/>
+            <SA length="1"/>
+            <FC length="1"/>
+            <DSAP length="1"/>
+            <SSAP length="1"/>
+            <PDU length="LE - 6"/>
+            <FCS length="1"/>
+            <ED length="1" const="0x16"/>
+        </VariableLengthData>
+        <FixedLengthData>
+            <SD3 length="1" const = "0xA2"/>
+            <DA length="1"/>
+            <SA length="1"/>
+            <FC length="1"/>
+            <PDU length="2"/>
+            <FCS length="1"/>
+            <ED length="1" const="0x16"/>
+        </FixedLengthData>
+        <Token>
+            <SD4 length="1" const="0xDC"/>
+            <DA length="1"/>
+            <SA length="1"/>
+            <ED length="1" const="0x16"/>
+        </Token>
+        <SimpleResponse>
+            <SD length="1" const="0xE5"/>
+        </SimpleResponse>
+    </Profibus_DP>
+    <CDT>
+        <start length="2" const="0xEB90" times="3"/>
+        <dataType length="1"/>
+        <infoCount length="1"/>
+        <source length="1"/>
+        <dest length="1"/>
+        <CRC length="1"/>
+        <infoField length="6" times="infoCount">
+            <Function length="1"/>
+            <data length="4"/>
+            <CRC length="1"/>
+        </infoField>
+    </CDT>
+</protocol>
