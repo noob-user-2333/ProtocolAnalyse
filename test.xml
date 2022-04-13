@@ -38,16 +38,16 @@
             <data />
             <LRCcheck length="2"/>
             <end  length="2" const="0x0D0A"/>
-            <checkSum/>
+            <checkSum   length="1"/>
         </normal>
     </Modubus_ASCII>
     <Profibus_DP defaultAddress="0x10">
         <NoData>
             <SD1 const = "0x10" length="1"/>
             <DA  length = "1"/>
-            <SA />
-            <FC/>
-            <FCS/>
+            <SA length="1"/>
+            <FC length="1"/>
+            <FCS length="1"/>
             <ED length="1" const="0x16"/>
         </NoData>
         <VariableLengthData>
@@ -85,7 +85,13 @@
     </Profibus_DP>
     <CDT>
         <start length="2" const="0xEB90" times="3"/>
-        <dataType length="1"/>
+        <controlByte length="1">
+            <fixbit bit="4" cconst="1"/>
+            <destValid bit="1"/>
+            <sourValid bit="1"/>
+            <infoValid bit="1"/>
+            <extentBit bit="1"/>
+        </controlByte>
         <infoCount length="1"/>
         <source length="1"/>
         <dest length="1"/>
